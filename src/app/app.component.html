@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Menu</title>
+  <link rel="icon" type="image/x-icon" href="assets/studio.ico">
+</head>
+
+<body>
+  <div id="page-content-wrapper">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" [hidden]="esconderBarra()">
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/chart']" routerLinkActive="router-link-active">Dashboard</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Cadastros
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/categoriaList']"
+                routerLinkActive="router-link-active">Categorias</a>
+              <a class="dropdown-item" [routerLink]="['/clienteList']"
+                routerLinkActive="router-link-active">Clientes</a>
+              <a class="dropdown-item" [routerLink]="['/fornList']"
+                routerLinkActive="router-link-active">Fornecedores</a>
+              <a class="dropdown-item" [routerLink]="['/profissionalList']"
+                routerLinkActive="router-link-active">Profissionais</a>
+              <a class="dropdown-item" [routerLink]="['/servicoList']"
+                routerLinkActive="router-link-active">Serviços</a>
+              <a class="dropdown-item" [routerLink]="['/usuarioList']"
+                routerLinkActive="router-link-active">Usuários</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Financeiro
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">              
+              <a class="dropdown-item" [routerLink]="['/ctapagarList']" routerLinkActive="router-link-active">Contas a Pagar</a>
+              <a class="dropdown-item" [routerLink]="['/ctarecList']" routerLinkActive="router-link-active">Contas a Receber</a>
+              <a class="dropdown-item" [routerLink]="['/fpaList']" routerLinkActive="router-link-active">Formas de Pagamento</a>
+              <a class="dropdown-item" [routerLink]="['/pctaList']" routerLinkActive="router-link-active">Plano de Contas</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Movimentação
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/agendamentoList']" routerLinkActive="router-link-active">Agendamento</a>
+              <a class="dropdown-item" href="#">Tabela de Preço</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Relatórios
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/cliReport']" routerLinkActive="router-link-active">Clientes</a>
+              <a class="dropdown-item" [routerLink]="['/fornReport']"
+                routerLinkActive="router-link-active">Fornecedores</a>
+              <a class="dropdown-item" [routerLink]="['/servicoReport']"
+                routerLinkActive="router-link-active">Serviços</a>
+              <a class="dropdown-item" [routerLink]="['/userReport']" routerLinkActive="router-link-active">Usuários</a>
+
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Dashboard
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/chartAge']"
+                routerLinkActive="router-link-active">Agendamentos</a>
+              <a class="dropdown-item" [routerLink]="['/chart']" routerLinkActive="router-link-active">Usuários</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="sair()">Sair</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+  <div>
+    <div class="footer">
+      <p>Copyright &copy; 2008 - by MEMC INFORMÁTICA</p>
+    </div>
+  </div>
+</body>
+
+</html>

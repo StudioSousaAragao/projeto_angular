@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contas a Pagar</title>
+    <link rel="icon" type="image/x-icon" href="assets/studio.ico">
+</head>
+
+<br />
+
+<body>
+    <div class="container">
+        <div>
+            <form style="padding: 10px;" #formValidate="ngForm">
+
+                <div class="card bg-secondary text-white" style="text-align: center;">
+                    <div class="card-header">
+                        Contas a Pagar
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-1">
+                        <label for="id">ID</label>
+                        <input type="text" [(ngModel)]="contaspagar.id" class="form-control" id="id" readonly="true"
+                            name="id" autocomplete="false">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="fornecedor">Fornecedor</label>
+                        <span style="color: red; font-size: 23px;" *ngIf="fornecedorValidate.invalid"> *</span>
+                        <select [(ngModel)]="contaspagar.fornecedor.id " #fornecedorValidate="ngModel" id="fornecedor"
+                            name="fornecedor" class="form-control" required="true">
+                            <option [ngValue]="f.id" *ngFor="let f of fornecedores">{{f.nome}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="valor">Valor R$</label>
+                        <input type="text" [(ngModel)]="contaspagar.valor" class="form-control" id="valor" name="valor"
+                            required="true" autocomplete="false" currencyMask
+                            [options]="{prefix : '', thousands: '.', decimal : ','}">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="desconto">Desconto R$</label>
+                        <input type="text" [(ngModel)]="contaspagar.desconto" class="form-control" id="desconto"
+                            name="desconto" required="true" autocomplete="false" currencyMask
+                            [options]="{prefix : '', thousands: '.', decimal : ','}">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="datavencimento">Vencimento</label>
+                        <span style="color: red; font-size: 23px;"> *</span>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="datavencimento" placeholder="dd/mm/yyyy"
+                                name="datavencimento" ngbDatepicker #datavencimento="ngbDatepicker"
+                                [(ngModel)]="contaspagar.datavencimento" required="true">
+
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" (click)="datavencimento.toggle()"
+                                    type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="fp">Forma Pagamento</label>
+                        <span style="color: red; font-size: 23px;" *ngIf="fpValidate.invalid"> *</span>
+                        <select [(ngModel)]="contaspagar.fp.id" #fpValidate="ngModel" id="fp" name="fp"
+                            class="form-control" required="true">
+                            <option [ngValue]="fp.id" *ngFor="let fp of formaspagamento">{{fp.descricao}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="documento">Documento</label>
+                        <input type="text" [(ngModel)]="contaspagar.documento" class="form-control" id="documento"
+                            name="documento" required="true" autocomplete="false">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="notafiscal">Nota Fiscal</label>
+                        <input type="text" [(ngModel)]="contaspagar.notafiscal" class="form-control" id="notafiscal"
+                            name="notafiscal" required="true" autocomplete="false">
+                    </div>
+
+                    <div class="form-group col-md-1">
+                        <label for="parcela">Parcela</label>
+                        <input type="text" [(ngModel)]="contaspagar.parcela" class="form-control" id="parcela"
+                            name="parcela" required="true" autocomplete="false">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="status">Status</label>
+                        <span style="color: red; font-size: 23px;" *ngIf="statusValidate.invalid"> *</span>
+                        <select [(ngModel)]="contaspagar.status" name="status" id="status" #statusValidate="ngModel" class="form-control" required="true">                          
+                          <option selected value="A">Aberto</option>
+                          <option value="C">Cancelado</option>
+                          <option value="L">Liquidado</option>
+                          <option value="P">Pendente</option>
+                        </select>
+                    </div>    
+<!--
+                    <div class="form-group col-md-1">
+                        <label for="status">Status</label>
+                        <input type="text" [(ngModel)]="contaspagar.status" class="form-control" id="status"
+                            name="status" required="true" autocomplete="false">
+                    </div>
+-->                    
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="contaorigem">Conta Origem</label>
+                        <span style="color: red; font-size: 23px;" *ngIf="contaorigemValidate.invalid"> *</span>
+                        <select [(ngModel)]="contaspagar.contaorigem.id " #contaorigemValidate="ngModel"
+                            id="contaorigem" name="contaorigem" class="form-control" required="true">
+                            <option [ngValue]="co.id" *ngFor="let co of planocontas">{{co.descricao}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="contadestino">Conta Destino</label>
+                        <span style="color: red; font-size: 23px;" *ngIf="contadestinoValidate.invalid"> *</span>
+                        <select [(ngModel)]="contaspagar.contadestino.id " #contadestinoValidate="ngModel"
+                            id="contadestino" name="contadestino" class="form-control" required="true">
+                            <option [ngValue]="cd.id" *ngFor="let cd of planocontas">{{cd.descricao}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <label for="observacao">Observação</label>
+                        <input type="text" [(ngModel)]="contaspagar.observacao" class="form-control" id="observacao"
+                            name="observacao" autocomplete="false">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button type="button" class="btn btn-info" [routerLink]="['/ctapagarList']"
+                            routerLinkActive="router-link-active">Voltar</button>
+                        <button type="button" class="btn btn-success" (click)="novo()"
+                            style="margin-left: 10px;">Novo</button>
+                        <button type="button" class="btn btn-primary" [disabled]="formValidate.invalid"
+                            (click)="salvarContasPagar()" style="margin-left: 10px;">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Serviços</title>
+    <link rel="icon" type="image/x-icon" href="assets/studio.ico">
+</head>
+
+<br />
+
+<body>
+    <div class="container">
+      <div>  
+        <form style="padding: 10px;" #formValidate="ngForm">
+
+            <div class="card bg-secondary text-white" style="text-align: center;">
+                <div class="card-header">
+                    Cadastro de Serviços
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-1">
+                    <label for="id">ID</label>
+                    <input type="text" [(ngModel)]="servico.id" class="form-control" id="id" readonly="true" name="id"
+                        autocomplete="false">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="descricao">Serviço</label>
+                    <input type="text" [(ngModel)]="servico.descricao" class="form-control" id="descricao"
+                        name="descricao" required="true" autocomplete="false">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="duracao">Duracao</label>
+                    <input type="time" [(ngModel)]="servico.duracao" class="form-control" id="duracao" name="duracao"
+                        required="true" autocomplete="false">
+                </div>
+
+                <div class="form-group col-md-1">
+                    <label for="valor">Valor R$</label>
+                    <input type="text" [(ngModel)]="servico.valor" class="form-control" id="valor" name="valor"
+                        required="true" autocomplete="false" currencyMask
+                        [options]="{prefix : '', thousands: '.', decimal : ','}">
+                </div>
+
+                <div class="form-group col-md-1">
+                    <label for="comissao">Comissão</label>
+                    <input type="text" [(ngModel)]="servico.comissao" class="form-control" id="comissao" name="comissao"
+                        required="true" autocomplete="false" currencyMask
+                        [options]="{prefix : '', thousands: '.', decimal : ','}">
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="categoria">Categoria</label>
+                    <span style="color: red; font-size: 23px;" *ngIf="categoriaValidate.invalid"> *</span>
+                      <select [(ngModel)]="servico.categoria.id" #categoriaValidate="ngModel" id="categoria" name="categoria" class="form-control" required="true">
+                        <option [ngValue]="c.id" *ngFor="let c of categorias">{{c.nomecategoria}}</option>
+                      </select>
+                </div> 
+
+            </div>
+<!--            
+            <div class="form-row" id="modalCliente">   
+                   <div class="form-group col-md-6">                                        
+                      <label>Categoria</label>
+                         <input [(ngModel)]="servico.categoria.id" id="categoria" name="categoria" class="form-control" required="true">
+                         
+                         <div class="form-row">
+                           <button type="button" class="btn btn-success" style="margin-left: 10px;">Adicionar</button>
+                         </div>      
+                   </div>      
+                   <br />      
+                   <div class="form-row">                         
+                      <div class="form-group col-md-2">         
+                         <button type="button" class="btn btn-info">Pesquisar</button>                      
+                      </div>                                         
+                    </div>
+            </div>   
+-->             
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <button type="button" class="btn btn-info" [routerLink]="['/servicoList']"
+                        routerLinkActive="router-link-active">Voltar</button>
+                    <button type="button" class="btn btn-success" (click)="novo()"
+                        style="margin-left: 10px;">Novo</button>
+                    <button type="button" class="btn btn-primary" [disabled]="formValidate.invalid"
+                        (click)="salvarServico()" style="margin-left: 10px;">Salvar</button>
+                </div>
+            </div>                      
+        </form>
+      </div>  
+    </div>
+</body>
+
+</html>

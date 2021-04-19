@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Serviços</title>
+  <link rel="icon" type="image/x-icon" href="assets/studio.ico">
+</head>
+
+<br />
+
+<body>
+    <div class="container">
+      <div class="card bg-secondary text-white" style="text-align: center;">
+        <div class="card-header">
+          Cadastro de Serviços
+        </div>
+      </div>
+
+    <br />
+
+    <div>
+      <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2">
+          <input type="text" class="form-control" id="descricao" name="descricao" [(ngModel)]="descricao" placeholder="Pesquisa por Nome">
+        </div>
+        
+        <div>
+          <button type="button" (click)="consultaServico()" class="btn btn-info mb-2">Pesquisar</button>
+          <button type="button" [routerLink]="['/servicoAdd']" routerLinkActive="router-link-active"
+            style="margin-left: 5px;" class="btn btn-success mb-2">Novo</button>
+          <button type="button" (click)="imprimirRelatorioServ()" data-toggle="modal" data-target="#myModal"
+            class="btn btn-primary mb-2" style="margin-left: 5px;">Relatório</button>
+        </div>
+      </form>
+    </div>
+
+    <br />
+
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover table-condensed">
+        <thead class="thead-dark">
+          <th scope="col">ID</th>
+          <th scope="col">Serviço</th>
+          <th scope="col">Duração HH/MM</th>
+          <th scope="col">Valor R$</th>
+          <th scope="col">Comissão %</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Excluir</th>
+          <th scope="col">Alterar</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let serv of servs | paginate: { itemsPerPage: 5, currentPage: p, totalItems: total } let i = index" class="info">
+            <td>{{serv.id}}</td>
+            <td>{{serv.descricao}}</td>
+            <td>{{serv.duracao}}</td>
+            <td>{{serv.valor}}</td>
+            <td>{{serv.comissao}}</td>
+            <td>{{serv.categoria.nomecategoria}}</td>
+            <td><button (click)="deleteServico(serv.id, i)" class="btn btn-danger">Excluir</button></td>
+            <td><button [routerLink]="['/servicoAdd', serv.id]" routerLinkActive="router-link-active"
+                class="btn btn-warning">Editar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="text-center">
+      <pagination-controls (pageChange)="carregarPaginaServ(p = $event);" previousLabel="Anterior" nextLabel="Próximo"
+        responsive="true"></pagination-controls>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" style="min-width: 90%; min-height: 90%; height: 90%;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Relatório de Serviços - Studio Sousa Aragão</h5>
+          </div>
+          <div class="modal-body">
+            <iframe id="pdf" width="100%" height="500" frameborder="0" allowtransparency="true"></iframe>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</body>
+
+</html>

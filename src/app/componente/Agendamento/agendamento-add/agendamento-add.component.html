@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agendamento de Serviços</title>
+    <link rel="icon" type="image/x-icon" href="assets/studio.ico">
+</head>
+
+<br />
+
+<body>
+    <div class="container">
+      <div>  
+        <form style="padding: 10px;" #formValidate="ngForm">
+
+            <div class="card bg-secondary text-white" style="text-align: center;">
+                <div class="card-header">
+                    Agendamento de Serviços
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-1">
+                    <label for="id">ID</label>
+                    <input type="text" [(ngModel)]="agendamento.id" class="form-control" id="id" readonly="true"
+                        name="id" autocomplete="false">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="datacadastro">Data</label>
+                    <span style="color: red; font-size: 23px;"> *</span>
+                    <div class="input-group">
+                    <input type="text" class="form-control" id="datacadastro" placeholder="dd/mm/yyyy"
+                        name="datacadastro" ngbDatepicker #datacadastro="ngbDatepicker"
+                        [(ngModel)]="agendamento.datacadastro" required="true">
+        
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="datacadastro.toggle()" type="button"></button>
+                    </div>
+                    </div>
+                </div>            
+            
+                <div class="form-group col-md-4">
+                    <label for="nome">Cliente</label>
+                    <span style="color: red; font-size: 23px;" *ngIf="nomeValidate.invalid"> *</span>
+                    <select [(ngModel)]="agendamento.nome.id " #nomeValidate="ngModel" id="nome" name="nome"
+                        class="form-control" required="true">
+                        <option [ngValue]="a.id" *ngFor="let a of clientes">{{a.nome}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="servico">Serviço</label>
+                    <span style="color: red; font-size: 23px;" *ngIf="servicoValidate.invalid"> *</span>
+                    <select [(ngModel)]="agendamento.servico.id " #servicoValidate="ngModel" id="servico" name="servico"
+                        class="form-control" required="true">
+                        <option [ngValue]="s.id" *ngFor="let s of servicos">{{s.descricao}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="hora">Horário</label>
+                    <input type="time" [(ngModel)]="agendamento.hora" class="form-control" id="hora" name="hora"
+                        required="true" autocomplete="false">
+                </div>
+
+                <div class="form-group col-md-10">
+                    <label for="observacao">Observação</label>
+                    <input type="text" [(ngModel)]="agendamento.observacao" class="form-control" id="observacao"
+                        name="observacao" autocomplete="false">
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <button type="button" class="btn btn-info" [routerLink]="['/agendamentoList']"
+                        routerLinkActive="router-link-active">Voltar</button>
+                    <button type="button" class="btn btn-success" (click)="novo()"
+                        style="margin-left: 10px;">Novo</button>
+                    <button type="button" class="btn btn-primary" [disabled]="formValidate.invalid"
+                        (click)="salvarAgendamento()" style="margin-left: 10px;">Salvar</button>
+                </div>
+            </div>
+        </form>
+      </div>  
+    </div>
+</body>
+
+</html>
